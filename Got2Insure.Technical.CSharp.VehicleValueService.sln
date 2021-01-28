@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Got2Insure.Technical.CSharp.VehicleValueService", "src\Got2Insure.Technical.CSharp.VehicleValueService\Got2Insure.Technical.CSharp.VehicleValueService.csproj", "{B8CAA4DC-AA41-4359-B293-708C06B61892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Got2Insure.Technical.CSharp.VehicleValueService.Tests", "tests\Got2Insure.Technical.CSharp.VehicleValueService.Tests\Got2Insure.Technical.CSharp.VehicleValueService.Tests.csproj", "{085F83F9-F796-4D3B-A630-6BBFCE06079E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8CAA4DC-AA41-4359-B293-708C06B61892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8CAA4DC-AA41-4359-B293-708C06B61892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8CAA4DC-AA41-4359-B293-708C06B61892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8CAA4DC-AA41-4359-B293-708C06B61892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085F83F9-F796-4D3B-A630-6BBFCE06079E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085F83F9-F796-4D3B-A630-6BBFCE06079E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085F83F9-F796-4D3B-A630-6BBFCE06079E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085F83F9-F796-4D3B-A630-6BBFCE06079E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {122A56BB-B26E-475B-BC64-3910EB14D759}
+	EndGlobalSection
+EndGlobal
