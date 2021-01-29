@@ -30,7 +30,7 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService.Tests
         public void VehicleValueServiceShouldReturnValueForSingleVehicleRegistration()
         {
             var vehicleValueService = serviceProvider.GetService<IVehicleValueService>();
-            var result = vehicleValueService.GetVehicleValue(new[] { "VA16OFZ" }).ToList();
+            var result = vehicleValueService.GetVehicleValues(new[] { "VA16OFZ" }).ToList();
             CollectionAssert.AreEqual(new[] { new VehicleValueResult { VehicleRegistration = "VA16OFZ", VehicleValue = 15600m } }, result);
         }
 
@@ -45,7 +45,7 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService.Tests
             };
 
             var vehicleValueService = serviceProvider.GetService<IVehicleValueService>();
-            var result = vehicleValueService.GetVehicleValue(vehicleRegistrations).ToList();
+            var result = vehicleValueService.GetVehicleValues(vehicleRegistrations).ToList();
             Assert.AreEqual(3, result.Count);
         }
     }

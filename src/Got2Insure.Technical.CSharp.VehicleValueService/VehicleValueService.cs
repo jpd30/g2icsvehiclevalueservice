@@ -8,14 +8,17 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService
     {
         private readonly IConfiguration configuration;
         private readonly HttpClient httpClient;
+        private readonly VehicleValueDbContext vehicleValueDbContext;
 
         public VehicleValueService(IConfiguration configuration, HttpClient httpClient)
         {
             this.configuration = configuration;
             this.httpClient = httpClient;
+            this.vehicleValueDbContext = new VehicleValueDbContext();
+            this.vehicleValueDbContext.Database.EnsureCreated();
         }
 
-        public IEnumerable<VehicleValueResult> GetVehicleValue(IEnumerable<string> vehicleRegistrations)
+        public IEnumerable<VehicleValueResult> GetVehicleValues(IEnumerable<string> vehicleRegistrations)
         {
             var vehicleValueApiUri = this.configuration["vehicleValueApiUri"];
             var vehicleValueApiKey = this.configuration["vehicleValueApiKey"];
@@ -23,34 +26,53 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService
 
             var vehicleValueCacheSasUri = this.configuration["vehicleValueCacheSasUri"];
 
-            // Example return value - comment out before starting TASK 1.
+            /* TASK 0: Build the solution and run the two included tests.
+             * 
+             * The `VehicleValueServiceShouldReturnValueForSingleVehicleRegistration` test should PASS.
+             * The `VehicleValueServiceShouldReturnValueForMultipleVehicleRegistrations` test should FAIL.
+             *
+             * Comment out the following line before starting TASK 1.
+             */
             yield return new VehicleValueResult { VehicleRegistration = "VA16OFZ", VehicleValue = 15600m };
 
-            /* TASK 1: Implement service to get the value of vehicles with the supplied list of vehicle registrations.
-             * Replace "{apiKey}" and "{vehicleRegistration}" with the appropriate values in the vehicleValueApiUri string.
-             * Make a HTTP GET call to the VehicleValueApi for each vehicle, using the provided API URI and key.
-             * Interpret the API response as JSON and extract the vehicle value using the provided JSONPath.
-             * Return the result as a sequence of VehicleValueResult.
+            /* TASK 1: Write code to call the "Vehicle Value API" to obtain the monetary values of vehicles for the supplied list of vehicle registrations.
+             * 
+             * The `vehicleValueApiUri` string has two placeholders:
+             *   "{apiKey}" needs to be replaced with the supplied `vehicleValueApiKey`
+             *   "{vehicleRegistration}" needs to be replaced with a vehicle registration.
+             *   
+             * Using the provided `httpClient`, make a HTTP GET call to the Vehicle Value API for each vehicle using the modified `vehicleValueApiUri`.
+             * 
+             * The response from the Vehicle Value API is in the form of a JSON object.
+             * EITHER interpret the response as raw JSON OR deserialize it as an instance of `VehicleDataV2` (see the object model in the `VehicleValueApi` folder).
+             * Extract the value using the JsonPath given by `vehicleValueJsonPath` (or the equivalent if using the object model).
+             * 
+             * Return the result as a sequence of `VehicleValueResult`. N.B. you will need to return one `VehicleValueResult` for each vehicle registration.
              */
 
-            /* TASK 2: Store the VehicleValueApi responses to an Azure Storage Blob Container.
-             * Store the full response for each vehicle registration using the provided Shared-Access Signature URI.
+            /* TASK 2: Store the Vehicle Value API responses to an Azure Storage Blob Container.
+             * 
+             * Store the full response for each vehicle registration into the blob container which can be accessed using vehicleValueCacheSasUri.
+             * 
              * Blobs should be named "{vehicleRegistration}-{currentData:yyyyMMddTHHmmssZ}".
              */
 
             /* TASK 3: The call to the VehicleValueApi is expensive. Implement a basic cache to avoid repeated reqeusts.
-             * You will need to call the service and store the result to the cache if the vehicle does not have an entry already in the cache.
-             * Choose TASK 3a _OR_ TASK 3b.
              * 
-             * TASK 3a: Use the Blob Container as a cache to avoid repeated requests by vehicle registration.
+             * If the cache contains an entry for a given vehicle registration then you should return the cached value without calling the Vehicle Value API;
+             * otherwise, call the Vehicle Value API (as per TASK 1) and store the result to the cache before returning the result.
              * 
-             * TASK 3b: Use Entity Framework Core to create a local SQLite cache.
-             * You may use the provided VehicleValueDbContext for this purpose. Use the following statement to ensure the local cache file exists:
-             * context.Database.EnsureCreated();
+             * Choose EITHER TASK 3a OR TASK 3b.
+             * 
+             * TASK 3a: Use the Blob Container populated in TASK 2 as the cache.
+             * 
+             * TASK 3b: Use the Entity Framework Core Database Context `vehicleValueDbContext` to read from and write to a database cache.
              */
 
-            /* TASK 4: You get feedback that the call to GetVehicleValue() is taking too long for large numbers of VRNs.
-             * Use parallelisation to speed up the call by making upto 4 simultaneous requests to the VehicleValueApi.
+            /* TASK 4: You get feedback from the users of the VehicleValueService that the call to GetVehicleValue() is taking
+             * too long for large numbers of VRNs.
+             * 
+             * Use parallelisation to speed up the call by making up to 4 simultaneous requests to the Vehicle Value API.
              */
         }
     }
