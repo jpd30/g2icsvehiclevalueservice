@@ -54,7 +54,7 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService
              * 
              * Store the full response for each vehicle registration into the blob container which can be accessed using vehicleValueCacheSasUri.
              * 
-             * Blobs should be named "{vehicleRegistration}-{currentData:yyyyMMddTHHmmssZ}".
+             * Blobs should be named "{vehicleRegistration}-{currentDate:yyyyMMddTHHmmssZ}".
              */
 
             /* TASK 3: The call to the VehicleValueApi is expensive. Implement a basic cache to avoid repeated reqeusts.
