@@ -31,7 +31,7 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService.Tests
         {
             var vehicleValueService = serviceProvider.GetService<IVehicleValueService>();
             var result = vehicleValueService.GetVehicleValues(new[] { "VA16OFZ" }).ToList();
-            CollectionAssert.AreEqual(new[] { new VehicleValueResult { VehicleRegistration = "VA16OFZ", VehicleValue = 15600m } }, result);
+            CollectionAssert.AreEqual(new[] { new VehicleValueResult { VehicleRegistration = "VA16OFZ", VehicleValue = 15330m } }, result);
         }
 
         [Test]
@@ -40,8 +40,8 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService.Tests
             var vehicleRegistrations = new[]
             {
                 "VA16OFZ",
-                "AY11UBS",
-                "AHJ128E"
+                "AK05LXV",
+                "AC08WDJ"
             };
 
             var vehicleValueService = serviceProvider.GetService<IVehicleValueService>();
