@@ -12,5 +12,6 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService
         public bool Equals(VehicleValueResult that) => this.VehicleRegistration == that.VehicleRegistration && this.VehicleValue == that.VehicleValue;
 
         public override int GetHashCode() => HashCode.Combine(this.VehicleRegistration, this.VehicleValue);
+        public override string ToString() => $"{{ {this.VehicleRegistration}: {this.VehicleValue} }}";
     }
 }

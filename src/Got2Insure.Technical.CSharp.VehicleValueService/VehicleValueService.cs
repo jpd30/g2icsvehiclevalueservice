@@ -33,7 +33,7 @@ namespace Got2Insure.Technical.CSharp.VehicleValueService
              *
              * Comment out the following line before starting TASK 1.
              */
-            yield return new VehicleValueResult { VehicleRegistration = "VA16OFZ", VehicleValue = 15600m };
+            yield return new VehicleValueResult { VehicleRegistration = "VA16OFZ", VehicleValue = 15330m };
 
             /* TASK 1: Write code to call the "Vehicle Value API" to obtain the monetary values of vehicles for the supplied list of vehicle registrations.
              * 
